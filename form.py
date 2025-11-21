@@ -4,10 +4,17 @@ import json
 import pandas as pd
 import google.generativeai as genai
 from PIL import Image
+from dotenv import load_dotenv  
 
-# --- CONFIGURACIÓN ---
-API_KEY = "PEGA_TU_API_KEY_AQUI"  # <--- ¡No olvides tu clave!
-CARPETA_IMAGENES = "img"          # <--- AHORA BUSCA AQUÍ
+# Configuracion de entorno
+load_dotenv()  # <--- Cargamos las variables del archivo .env
+API_KEY = os.getenv("API_KEY")  # <--- Leemos la clave del entorno
+
+# Verificación de seguridad
+if not API_KEY:
+    raise ValueError("ERROR: No se encontró la API_KEY. Asegúrate de crear el archivo .env")
+
+CARPETA_IMAGENES = "img"
 ARCHIVO_SALIDA = "base_datos_completa.csv"
 
 # Configuramos la API
